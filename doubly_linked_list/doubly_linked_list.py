@@ -82,9 +82,10 @@ class DoublyLinkedList:
             self.tail.next = new_node
             self.tail = new_node
 
-    """Removes the List's current tail node, making the 
-    current tail's previous node the new tail of the List.
-    Returns the value of the removed Node."""
+    # """Removes the List's current
+    # """Removes the List's current tail node, making the 
+    # current tail's previous node the new tail of the List.
+    # Returns the value of the removed Node."""
     def remove_from_tail(self):
         value = self.tail.value
         self.delete(self.tail)
