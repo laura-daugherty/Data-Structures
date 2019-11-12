@@ -11,7 +11,9 @@ class Queue:
         # self.storage = ?
 
     def enqueue(self, value):
-        pass
+        self.storage.add_to_tail(value)
+        self.size +=1
+
 
     def dequeue(self):
         pass
