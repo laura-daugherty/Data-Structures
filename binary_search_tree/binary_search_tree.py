@@ -12,21 +12,99 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+# Code Along
+        if value < self.value:
+            if not self.left:
+                self.left = BinarySearchTree(value)
+            else:
+                self.left.insert(value)
+    
+        else:
+            if not self.right:
+                self.right = BinarySearchTree(value)
+            else:
+                self.right.insert(value)
+
+# Laura's solution
+        # newTree = BinarySearchTree(value)
+        # if self is None:
+        #     self = newTree
+        # else:
+        #     if newTree.value < self.value:
+        #         if self.left is None:
+        #             self.left = newTree
+        #         else:
+        #             self.left.insert(newTree.value)
+        #     else:
+        #         if self.right is None:
+        #             self.right = newTree
+        #         else:
+        #             self.right.insert(newTree.value)
+
+
+        # < go left
+        # >= go right
+        # print("self.right.value", self.right.value)
+        # print("self.left.value", self.left.value)
+
+
+
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        if self.value == target:
+            return True
+        if target < self.value:
+            if not self.left:
+                return False
+            else:
+                return self.left.contains(target)
+        else:
+            if not self.right:
+                return False
+            else:
+                return self.right.contains(target)
+
+
+            #To search a given key in Binary Search Tree, we first compare it with root, 
+        # if the key is present at root, we return root. If key is greater than root's key, 
+        # we recur for right subtree of root node. Otherwise we recur for left subtree.
+# code along
+
+
+
+
+#Laura's progress
+        # if self.value == target:
+        #     return True
+        # if target < self.value:
+        #     self.left.contains(target)
+        # if target >= self.value:
+        #     self.right.contains(target)
+        # else:
+        #     return False
+
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # Go right until you can go right no further
+        if not self.right:
+            return self.value
+        return self.right.get_max()
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        # visit every node exactly one time
+        # go left until you can't anymore, then
+        # go back and go right
+        # in here somewhere, you want to call cb(node)
+        cb(self.value)
+        if self.left:
+            self.left.for_each(cb)
+        if self.right:
+            self.right.for_each(cb)
 
     # DAY 2 Project -----------------------
 
