@@ -1,4 +1,4 @@
-Learn more or give us feedback
+# Learn more or give us feedback
 import sys
 sys.path.append('../doubly_linked_list')
 from doubly_linked_list import DoublyLinkedList
@@ -15,7 +15,7 @@ class Stack:
             self.storage.add_to_head(value)
         else:
             return self.storage.add_to_tail(value)
-
+        
 
     def pop(self):
         if self.size > 0:
