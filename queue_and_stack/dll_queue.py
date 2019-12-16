@@ -11,7 +11,9 @@ class Queue:
         self.storage = DoublyLinkedList()
 
     def enqueue(self, value):
-        pass
+        # add to end
+        self.size += 1
+        self.storage.add_to_tail(value)
 
     def dequeue(self):
         pass
