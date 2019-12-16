@@ -26,4 +26,4 @@ class Stack:
             return
 
     def len(self):
-        pass
+        return self.storage.length
