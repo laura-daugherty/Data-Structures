@@ -1,7 +1,6 @@
-import sys
-sys.path.append('../doubly_linked_list')
 from doubly_linked_list import DoublyLinkedList
-from doubly_linked_list import ListNode
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -12,9 +11,9 @@ class LRUCache:
     """
     def __init__(self, limit=10):
         self.limit = limit
-        self.size = 0
-        self.storage = dict()
-        self.order = DoublyLinkedList()
+        self.current = 0
+        self.dll = DoublyLinkedList()
+        self.dict = dict()
 
     """
     Retrieves the value associated with the given key. Also
@@ -24,14 +23,15 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        #key is present
-        if key in self.storage:
-            node = self.storage[key]
-            self.order.move_to_end(node)
-            return node.value[1]
-        else:
+        if key not in self.dict:
             return None
-        #key is not present
+        else:
+            node = self.dict[key]
+            print('__________________', node)
+            self.dll.move_to_end(node)
+            print("node.value", node.value[1])
+            return node.value[1]
+
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -43,25 +43,18 @@ class LRUCache:
     want to overwrite the old value associated with the key with
     the newly-specified value.
     """
-    def set(self, key, value): 
-  #cases to handle - does the key already exist (y/n)
-        if key in self.storage:
-            #replace value
-            node = self.storage[key]
+    def set(self, key, value):
+        if self.current == self.limit:
+            node = self.dict[key]
             node.value = (key, value)
-            self.order.move_to_end(node)
-            return
-        
-# at capacity (y/n)
-        if self.size == self.limit:
-            #dump oldest item
-            #remove from head/order
-            del self.storage[self.order.head.value[0]]
+            self.dll.remove_from_head()
+            self.dll.add_to_tail(node.value)
+        if key in self.dict:
+            self.dll.move_to_end(self)
+            self.dict.update(key, value)
+        else:
+            self.dict[key] = value
+            self.current += 1
+            self.dll.add_to_tail(self)
 
-            self.order.remove_from_head()
-            #delete key/value pair
-            #subtract the count
-            self.size -= 1
-        self.order.add_to_tail((key, value))
-        self.storage[key] = self.order.tail
-        self.size += 1
+
